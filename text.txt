@@ -1,0 +1,9 @@
+Using GPU
+Predicted Classes:  ['100', '5', '41', '71', '59']
+Class Names: 
+blanket flower
+english marigold
+barbeton daisy
+gazania
+orange dahlia
+Predicted Probability:  [ 0.61259848  0.20748846  0.12523775  0.01655635  0.01285177]
