@@ -26,9 +26,8 @@ def cook_data(args):
     test_dir = data_dir + '/test'
 
     #Define your transforms for the training, validation, and testing sets
-    train_transforms = transforms.Compose([transforms.RandomRotation(30),
+    train_transforms = transforms.Compose([transforms.Resize(256),
                                        transforms.RandomResizedCrop(224),
-                                       transforms.RandomHorizontalFlip(),
                                        transforms.ToTensor(),
                                        transforms.Normalize([0.485, 0.456, 0.406], 
                                                             [0.229, 0.224, 0.225])])
@@ -113,10 +112,10 @@ def train_model(args, model, criterion, optimizer, scheduler, num_epochs=25):
                 # statistics
                 running_loss += loss.data * inputs.size(0)
                 running_corrects += torch.sum(preds == labels.data)
-
+               
             epoch_loss = running_loss / dataset_sizes[phase]
             epoch_acc = running_corrects.double() / dataset_sizes[phase]
-
+            #print ("epoch", epoch_acc)
             print('{} Loss: {:.4f} Acc: {:.4f}'.format(
                 phase, epoch_loss, epoch_acc))
 
@@ -204,7 +203,7 @@ def main():
     parser.add_argument('--arch', type=str, default='densenet', help='architecture [available: densenet, vgg]', required=True)
     parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
     parser.add_argument('--hidden_units', type=int, default=100, help='hidden units for fc layer')
-    parser.add_argument('--epochs', type=int, default=15, help='number of epochs')
+    parser.add_argument('--epochs', type=int, default=20, help='number of epochs')
     parser.add_argument('--data_dir', type=str, default='flowers', help='dataset directory')
     parser.add_argument('--saved_model' , type=str, default='my_checkpoint_cmd.pth', help='path of your saved model')
     args = parser.parse_args()
